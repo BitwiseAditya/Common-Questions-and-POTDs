@@ -25,28 +25,19 @@ Constraints:
 #include <bits/stdc++.h>
 using namespace std;
 
-int nCr(int n, int r)
+long long nCr(int n, int r)
 {
     // code here
     if (r > n)
         return 0;
-    vector<vector<int>> dp(n + 1, vector<int>(r + 1, 0));
-    for (int i = 0; i <= r; i++)
-    {
-        dp[0][i] = 0;
+    r = min(r , n - r);
+    long long ans = 1;
+
+    for(int i=1; i<=r; i++){
+        ans = ans * ( n - r + i ) / i ;
     }
-    for (int i = 0; i <= n; i++)
-    {
-        dp[i][0] = 1;
-        if (i <= r)
-            dp[i][i] = 1;
-    }
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= r; j++)
-        {
-            dp[i][j] = dp[i - 1][j] + dp[i - 1][j - 1];
-        }
-    }
-    return dp[n][r];
+
+    return ans ;
 }
+
+// Time Complexity : O(min(r,n-r))  Linear Time Algo.
